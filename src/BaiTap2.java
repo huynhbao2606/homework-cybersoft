@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class BaiTap2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int key = 0;
+        int key;
         do {
             System.out.println("\n════════════════════ MENU ════════════════════");
             System.out.println("│ 1. Tìm số lớn nhất trong 3 số             │");
