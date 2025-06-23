@@ -9,20 +9,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SinhVien extends MonHoc {
+public class SinhVien{
     private String name;
     private int maSv;
-
-
-    public SinhVien(String name, int maSv, double toan, double ly, double hoa) {
-        super(toan, ly, hoa);
-        this.name = name;
-        this.maSv = maSv;
-    }
-
+    private MonHoc monHoc;
 
     public double diemTrungBinh(){
-        return (super.getToan() + super.getLy() +  super.getHoa()) / 3;
+        return (this.monHoc.getToan() + this.monHoc.getLy() +  this.monHoc.getHoa()) / 3;
     }
 
     public String xepLoai(){
@@ -41,12 +34,12 @@ public class SinhVien extends MonHoc {
     }
 
     public String ketQua() {
-        return "Tên: " + this.name + "\n" +
-                "Mã SV: " + this.maSv + "\n" +
-                "Điểm Toán: " + super.getToan() + "\n" +
-                "Điểm Lý: " + super.getLy() + "\n" +
-                "Điểm Hoá: " + super.getHoa() + "\n" +
-                "Điểm Trung Bình: " + diemTrungBinh() + "\n" +
-                "Xếp Loại: " + xepLoai();
+        return "Tên: " + this.name + "\n"
+                + "Mã SV: " + this.maSv + "\n"
+                + "Điểm Toán: " + this.monHoc.getToan() + "\n"
+                + "Điểm Lý: " +  this.monHoc.getLy() + "\n"
+                + "Điểm Hóa: " +  this.monHoc.getHoa() + "\n"
+                + "Điểm Trung Bình: " + diemTrungBinh() + "\n"
+                + "Xếp Loại: " + xepLoai();
     }
 }
