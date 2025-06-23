@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PhuongTienGiaoThong {
+public abstract class PhuongTienGiaoThong {
     private String hangSanXuat;
     private String mauSac;
     private String namSanXuat;

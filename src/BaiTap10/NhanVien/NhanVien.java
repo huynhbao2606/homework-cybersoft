@@ -11,7 +11,7 @@ import java.util.Scanner;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class NhanVien {
+public abstract class NhanVien {
     private String hoTen;
     private String ngaySinh;
     private double luong;

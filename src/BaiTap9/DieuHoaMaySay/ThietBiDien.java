@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ThietBiDien {
+public abstract class ThietBiDien {
     private String tenThietBi;
     private double congSuat;
     private  String chucNang;
