@@ -21,49 +21,81 @@ public class CongTy {
     private double doanhThuThang;
     private ArrayList<NhanSu> nhanSu = new ArrayList<>();
 
-    public void taoDuLieuGia() {
-        TruongPhong tp1 = new TruongPhong("TP01", "Lê Văn A", "0969026600", 12); // có nhân viên
-        TruongPhong tp2 = new TruongPhong("TP02", "Lê Thị B", "0909000002", 20);     // có nhân viên
-        TruongPhong tp3 = new TruongPhong("TP03", "Phan Văn C", "0909000010", 18);   // chưa có ai
+    public void taoDuLieuGia(CongTy congTy) {
+        TruongPhong tp1 = new TruongPhong("TP01", "Lê Văn Anh", "0901000001", 20);
+        TruongPhong tp2 = new TruongPhong("TP02", "Nguyễn Minh Tuấn", "0901000002", 22);
+        TruongPhong tp3 = new TruongPhong("TP03", "Trần Quốc Việt", "0901000003", 21);
+        TruongPhong tp4 = new TruongPhong("TP04", "Phạm Thanh Hùng", "0901000004", 19);
+        TruongPhong tp5 = new TruongPhong("TP05", "Đỗ Thị Thảo", "0901000005", 18);
+
+        congTy.getNhanSu().add(tp1);
+        congTy.getNhanSu().add(tp2);
+        congTy.getNhanSu().add(tp3);
+        congTy.getNhanSu().add(tp4);
+        congTy.getNhanSu().add(tp5);
 
 
-        NhanVien nv1 = new NhanVien("NV01", "Trần Văn C", "0909000003", 20);
-        NhanVien nv2 = new NhanVien("NV02", "Phạm Thị D", "0909000004", 19);
-        nv1.setTruongPhong(tp1);
-        nv2.setTruongPhong(tp1);
-        tp1.getNhanVien().add(nv1);
-        tp1.getNhanVien().add(nv2);
+        NhanVien[] nvs = {
+                new NhanVien("NV01", "Nguyễn Thị Mai", "0911000001", 22),
+                new NhanVien("NV02", "Trần Văn Hùng", "0911000002", 21),
+                new NhanVien("NV03", "Phạm Thị Hương", "0911000003", 20),
+                new NhanVien("NV04", "Lê Công Thành", "0911000004", 19),
+                new NhanVien("NV05", "Đặng Thị Tuyết", "0911000005", 18),
+                new NhanVien("NV06", "Vũ Minh Quang", "0911000006", 20),
+                new NhanVien("NV07", "Hoàng Thị Bích", "0911000007", 21),
+                new NhanVien("NV08", "Ngô Quang Khải", "0911000008", 22),
+                new NhanVien("NV09", "Bùi Thị Lan", "0911000009", 23),
+                new NhanVien("NV10", "Lý Quốc Tuấn", "0911000010", 20),
+                new NhanVien("NV11", "Đinh Thị Hồng", "0911000011", 19),
+                new NhanVien("NV12", "Nguyễn Văn Hiếu", "0911000012", 22),
+                new NhanVien("NV13", "Trần Thị Ngọc", "0911000013", 20),
+                new NhanVien("NV14", "Phạm Văn An", "0911000014", 21),
+                new NhanVien("NV15", "Lê Thị Mỹ", "0911000015", 22),
+                new NhanVien("NV16", "Đỗ Minh Châu", "0911000016", 20),
+                new NhanVien("NV17", "Vũ Thị Trang", "0911000017", 21),
+                new NhanVien("NV18", "Hoàng Văn Phúc", "0911000018", 22),
+                new NhanVien("NV19", "Ngô Minh Tú", "0911000019", 23),
+                new NhanVien("NV20", "Bùi Thị Kiều", "0911000020", 20),
+                new NhanVien("NV21", "Tống Thị Hà", "0911000021", 20),
+                new NhanVien("NV22", "Trịnh Văn Cường", "0911000022", 21),
+                new NhanVien("NV23", "Nguyễn Hữu Đạt", "0911000023", 19),
+                new NhanVien("NV24", "Phạm Thị Yến", "0911000024", 22),
+                new NhanVien("NV25", "Lê Quốc Huy", "0911000025", 20)
+        };
 
-        NhanVien nv3 = new NhanVien("NV03", "Hoàng Văn E", "0909000005", 18);
-        NhanVien nv4 = new NhanVien("NV04", "Đỗ Thị F", "0909000006", 22);
-        nv3.setTruongPhong(tp2);
-        nv4.setTruongPhong(tp2);
-        tp2.getNhanVien().add(nv3);
-        tp2.getNhanVien().add(nv4);
+        TruongPhong[] tps = {tp1, tp2, tp3, tp4, tp5};
 
-        NhanVien nv5 = new NhanVien("NV05", "Ngô Văn G", "0909000011", 21);
-        NhanVien nv6 = new NhanVien("NV06", "Vũ Thị H", "0909000012", 19);
+        for (int i = 0; i < 20; i++) {
+            NhanVien nv = nvs[i];
+            TruongPhong tp = tps[i % tps.length];
+            nv.setTruongPhong(tp);
+            tp.getNhanVien().add(nv);
+            congTy.getNhanSu().add(nv);
+        }
 
-        GiamDoc gd1 = new GiamDoc("GD01", "Huỳnh Chí Bảo", "0969026600", 30, 50.0);
-        GiamDoc gd2 = new GiamDoc("GD02", "Mai Thị H", "0909000008", 24, 40.0);
-        gd1.setCongTy(this);
-        gd2.setCongTy(this);
+        for (int i = 20; i < nvs.length; i++) {
+            congTy.getNhanSu().add(nvs[i]);
+        }
 
-        nhanSu.add(tp1);
-        nhanSu.add(tp2);
-        nhanSu.add(tp3);
+        GiamDoc gd1 = new GiamDoc("GD01", "Huỳnh Chí Bảo", "0988000001", 30, 25.0);
+        GiamDoc gd2 = new GiamDoc("GD02", "Mai Thị Hạnh", "0988000002", 25, 20.0);
+        GiamDoc gd3 = new GiamDoc("GD03", "Lê Minh Khoa", "0988000003", 28, 15.0);
+        GiamDoc gd4 = new GiamDoc("GD04", "Nguyễn Hữu Nhân", "0988000004", 27, 25.0);
+        GiamDoc gd5 = new GiamDoc("GD05", "Trần Quốc Đạt", "0988000005", 26, 15.0);
 
-        nhanSu.add(nv1);
-        nhanSu.add(nv2);
-        nhanSu.add(nv3);
-        nhanSu.add(nv4);
-        nhanSu.add(nv5);
-        nhanSu.add(nv6);
+        gd1.setCongTy(congTy);
+        gd2.setCongTy(congTy);
+        gd3.setCongTy(congTy);
+        gd4.setCongTy(congTy);
+        gd5.setCongTy(congTy);
 
-        nhanSu.add(gd1);
-        nhanSu.add(gd2);
+        congTy.getNhanSu().add(gd1);
+        congTy.getNhanSu().add(gd2);
+        congTy.getNhanSu().add(gd3);
+        congTy.getNhanSu().add(gd4);
+        congTy.getNhanSu().add(gd5);
 
-        System.out.println("Đã tạo dữ liệu giả!");
+        System.out.println("\nĐã tạo dữ liệu giả!!!");
     }
 
 
@@ -452,7 +484,7 @@ public class CongTy {
         System.out.println("\n--- Nhân viên thường ---");
         for (NhanSu ns : nhanSu) {
             if (ns instanceof NhanVien nv) {
-                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày LV: %d - Trưởng phòng: %s\n",
+                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Làm Việc: %d - Trưởng phòng: %s\n",
                         stt++, nv.getMaSo(), nv.getHoTen(), nv.getSoDienThoai(), nv.getSoNgayLamViec(),
                         nv.getTruongPhong() != null ? nv.getTruongPhong().getHoTen() : "Chưa phân");
             }
@@ -462,7 +494,7 @@ public class CongTy {
         System.out.println("\n--- Trưởng phòng ---");
         for (NhanSu ns : nhanSu) {
             if (ns instanceof TruongPhong tp) {
-                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày LV: %d - SL Nhân viên quản lý: %d\n",
+                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Ngày Làm Việc: %d - SL Nhân viên quản lý: %d\n",
                         stt++, tp.getMaSo(), tp.getHoTen(), tp.getSoDienThoai(), tp.getSoNgayLamViec(),
                         tp.getNhanVien().size());
             }
@@ -472,7 +504,7 @@ public class CongTy {
         System.out.println("\n--- Giám đốc ---");
         for (NhanSu ns : nhanSu) {
             if (ns instanceof GiamDoc gd) {
-                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày LV: %d - Cổ phần: %.2f%%\n",
+                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Làm Việc1: %d - Cổ phần: %.2f%%\n",
                         stt++, gd.getMaSo(), gd.getHoTen(), gd.getSoDienThoai(), gd.getSoNgayLamViec(),
                         gd.getCoPhan());
             }

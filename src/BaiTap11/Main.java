@@ -20,16 +20,16 @@ public class Main {
             System.out.println("║ 5. Tính và xuất tổng lương toàn công ty       ║");
             System.out.println("║ 6. Tìm Nhân viên có lương cao nhất            ║");
             System.out.println("║ 7. Trưởng phòng có nhiều nhân viên nhất       ║");
-            System.out.println("║ 8. Sắp xếp theo tên (A → Z)                   ║");
+            System.out.println("║ 8. Sắp xếp theo tên (A -> Z)                  ║");
             System.out.println("║ 9. Sắp xếp theo lương giảm dần                ║");
             System.out.println("║ 10. Giám đốc có cổ phần nhiều nhất            ║");
             System.out.println("║ 11. Tổng thu nhập từng Giám đốc               ║");
-            System.out.println("║ 12. Tạo dữ liệu giả mẫu                       ║");
-            System.out.println("║ 13. Thoát chương trình                        ║");
+            System.out.println("║ 12. Tạo dữ liệu giả                           ║");
+            System.out.println("║ 0. Thoát chương trình                         ║");
             System.out.println("╚═══════════════════════════════════════════════╝");
 
             try {
-                System.out.print("-> Nhập lựa chọn của bạn (1–13): ");
+                System.out.print("-> Nhập lựa chọn của bạn (1–12) - 0 Để Thoát: ");
                 key = Integer.parseInt(sc.nextLine());
 
                 switch (key) {
@@ -44,8 +44,8 @@ public class Main {
                     case 9 -> congTy.sapXepNhanSuTheoLuongGiamDan();
                     case 10 -> congTy.timGiamDocCoCoPhanNhieuNhat();
                     case 11 -> congTy.tinhVaXuatThuNhapCuaGiamDoc();
-                    case 12 -> congTy.taoDuLieuGia();
-                    case 13 -> {
+                    case 12 -> congTy.taoDuLieuGia(congTy);
+                    case 0 -> {
                         System.out.println("Đã thoát chương trình!!!");
                         return;
                     }
