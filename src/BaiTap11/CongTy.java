@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.text.NumberFormat;
+import java.util.*;
 
 
 @Getter
@@ -209,8 +207,45 @@ public class CongTy {
             tongLuong += luong;
         }
 
-        System.out.printf("\nTổng lương toàn công ty: %.2f\n", tongLuong);
+        System.out.println("\nTổng lương toàn công ty: %.2f\n" + dinhDangTienVND(tongLuong));
         System.out.println("========================================");
+    }
+
+    public void xuatThongTinToanBoNhanSu() {
+        System.out.println("\n======= DANH SÁCH TOÀN BỘ NHÂN SỰ TRONG CÔNG TY =======");
+
+        int stt = 1;
+
+        System.out.println("\n--- Nhân viên thường ---");
+        for (NhanSu ns : nhanSu) {
+            if (ns instanceof NhanVien nv) {
+                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Làm Việc: %d - Trưởng phòng: %s\n",
+                        stt++, nv.getMaSo(), nv.getHoTen(), nv.getSoDienThoai(), nv.getSoNgayLamViec(),
+                        nv.getTruongPhong() != null ? nv.getTruongPhong().getHoTen() : "Chưa phân");
+            }
+        }
+
+        stt = 1;
+        System.out.println("\n--- Trưởng phòng ---");
+        for (NhanSu ns : nhanSu) {
+            if (ns instanceof TruongPhong tp) {
+                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Ngày Làm Việc: %d - SL Nhân viên quản lý: %d\n",
+                        stt++, tp.getMaSo(), tp.getHoTen(), tp.getSoDienThoai(), tp.getSoNgayLamViec(),
+                        tp.getNhanVien().size());
+            }
+        }
+
+        stt = 1;
+        System.out.println("\n--- Giám đốc ---");
+        for (NhanSu ns : nhanSu) {
+            if (ns instanceof GiamDoc gd) {
+                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Làm Việc1: %d - Cổ phần: %.2f%%\n",
+                        stt++, gd.getMaSo(), gd.getHoTen(), gd.getSoDienThoai(), gd.getSoNgayLamViec(),
+                        gd.getCoPhan());
+            }
+        }
+
+        System.out.println("========================================================");
     }
 
     public void timNhanVienLuongCaoNhat() {
@@ -315,8 +350,8 @@ public class CongTy {
                     : "Giám Đốc";
 
 
-            System.out.printf("%d. [%s] %s - Lương: %.2f - (%s)\n",
-                    stt++, ns.getMaSo(), ns.getHoTen(), ns.tinhLuong(), loai);
+            System.out.printf("%d. [%s] %s - Lương: %s - (%s)\n",
+                    stt++, ns.getMaSo(), ns.getHoTen(), dinhDangTienVND(ns.tinhLuong()), loai);
         }
 
         System.out.println("======================================================");
@@ -379,10 +414,12 @@ public class CongTy {
             double luong = gd.tinhLuong();
             double thuNhap = luong + gd.getCoPhan() * loiNhuanCongTy;
 
-            System.out.printf("%d. Lợi Nhuân Công Ty: [%.2f] [%s] %s - Lương: %.2f - Cổ phần: %.2f%% → Tổng thu nhập: %.2f\n",
-                    stt++, loiNhuanCongTy, gd.getMaSo(), gd.getHoTen(), luong, gd.getCoPhan(), thuNhap);
+            System.out.println(stt++ + ". Lợi Nhuận Công Ty: [" + dinhDangTienVND(loiNhuanCongTy) + "] [" + gd.getMaSo() + "] " +
+                    gd.getHoTen() + " - Lương: " + dinhDangTienVND(luong) + " - Cổ phần: " + gd.getCoPhan() + "% → Tổng thu nhập: " + dinhDangTienVND(thuNhap));
         }
     }
+
+
 
     private void themNhanSuMoi(Scanner sc) {
         System.out.println("\n--- THÊM NHÂN SỰ ---");
@@ -476,40 +513,9 @@ public class CongTy {
         System.out.println("Đã xóa nhân sự: " + ns.getHoTen());
     }
 
-    public void xuatThongTinToanBoNhanSu() {
-        System.out.println("\n======= DANH SÁCH TOÀN BỘ NHÂN SỰ TRONG CÔNG TY =======");
-
-        int stt = 1;
-
-        System.out.println("\n--- Nhân viên thường ---");
-        for (NhanSu ns : nhanSu) {
-            if (ns instanceof NhanVien nv) {
-                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Làm Việc: %d - Trưởng phòng: %s\n",
-                        stt++, nv.getMaSo(), nv.getHoTen(), nv.getSoDienThoai(), nv.getSoNgayLamViec(),
-                        nv.getTruongPhong() != null ? nv.getTruongPhong().getHoTen() : "Chưa phân");
-            }
-        }
-
-        stt = 1;
-        System.out.println("\n--- Trưởng phòng ---");
-        for (NhanSu ns : nhanSu) {
-            if (ns instanceof TruongPhong tp) {
-                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Ngày Làm Việc: %d - SL Nhân viên quản lý: %d\n",
-                        stt++, tp.getMaSo(), tp.getHoTen(), tp.getSoDienThoai(), tp.getSoNgayLamViec(),
-                        tp.getNhanVien().size());
-            }
-        }
-
-        stt = 1;
-        System.out.println("\n--- Giám đốc ---");
-        for (NhanSu ns : nhanSu) {
-            if (ns instanceof GiamDoc gd) {
-                System.out.printf("%d. [%s] %s - SĐT: %s - Ngày Làm Việc1: %d - Cổ phần: %.2f%%\n",
-                        stt++, gd.getMaSo(), gd.getHoTen(), gd.getSoDienThoai(), gd.getSoNgayLamViec(),
-                        gd.getCoPhan());
-            }
-        }
-
-        System.out.println("========================================================");
+    private String dinhDangTienVND(double tien) {
+        NumberFormat vndFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        return vndFormat.format(tien);
     }
+
 }
